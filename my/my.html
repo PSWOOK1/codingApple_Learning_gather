@@ -1,0 +1,45 @@
+<script>
+  var nowPicture = 1;
+  var imgLength = $(".slide-box").length;
+
+  $(".preview").on("click", function () {
+    if (nowPicture > 1) {
+      nowPicture--;
+      $(".slide-container").css(
+        "transform",
+        "translateX(-" + (nowPicture - 1) + "00vw)"
+      );
+      console.log("1 마이너스", nowPicture);
+    }
+    // else if (nowPicture === 1) {
+    //   $(".slide-container").css("transform", "translateX(0vw)");
+    //   console.log("1 에서 못내려감", nowPicture);
+    // }
+  });
+
+  $(".slide-1").on("click", function () {
+    $(".slide-container").css("transform", "translateX(0vw)");
+    nowPicture = 1;
+  });
+
+  $(".slide-2").on("click", function () {
+    $(".slide-container").css("transform", "translateX(-100vw)");
+    nowPicture = 2;
+  });
+
+  $(".slide-3").on("click", function () {
+    $(".slide-container").css("transform", "translateX(-200vw)");
+    nowPicture = 3;
+  });
+
+  $(".next").on("click", function () {
+    if (nowPicture < imgLength) {
+      $(".slide-container").css(
+        "transform",
+        "translateX(-" + nowPicture + "00vw)"
+      );
+      nowPicture++;
+      console.log("1 추가요", nowPicture);
+    }
+  });
+</script>

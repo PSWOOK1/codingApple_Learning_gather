@@ -1,0 +1,21 @@
+<!-- // Q5. 간단한 퀴즈 UI를 만들어봅시다. -->
+
+<p>태조 이성계가 태어난 년도는?</p>
+<input type="text" id="answer" />
+<button id="send-answer">제출</button>
+
+<script>
+  var count = 1;
+
+  document.getElementById("send-answer").addEventListener("click", function () {
+    if (document.getElementById("answer").value === "1335") {
+      alert("성공");
+    } else if (count % 3 === 0) {
+      alert("멍청아");
+      count++;
+    } else if (document.getElementById("answer").value !== "1335") {
+      alert("실패");
+      count++;
+    }
+  });
+</script>

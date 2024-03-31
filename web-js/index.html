@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link href="main.css" rel="stylesheet" />
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+
+    <title>Hello, world!</title>
+  </head>
+  <body class>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="ID" />
+          </div>
+          <div class="my-3">
+            <input type="password" class="form-control" id="PW" />
+          </div>
+          <button type="submit" class="btn btn-primary" id="send">전송</button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 누구냐 넌 -->
+    <script>
+      document
+        .querySelector(".black-bg")
+        .addEventListener("click", function (e) {
+          if (e.target === document.querySelector(".black-bg")) {
+            document.querySelector(".black-bg").classList.remove("show-modal");
+          }
+        });
+    </script>
+
+    <!-- 메인 간판 -->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <span class="navbar-brand">wookShop</span>
+        <span class="badge bg-dark">Dark 🔄</span>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="scrolling"></div>
+    </nav>
+
+    <!-- 브랜드명(wookShop) 줄이기 -->
+    <script>
+      $(window).on("scroll", function () {
+        if ($(window).scrollTop() > 100) {
+          $(".navbar-brand").addClass("navbar-brandSmall");
+        } else {
+          $(".navbar-brand").removeClass("navbar-brandSmall");
+        }
+      });
+    </script>
+
+    <!-- 스크롤 양에 따라 선 채우기 -->
+    <script>
+      $(window).on("scroll", function () {
+        let 실제높이 = document.querySelector("html").scrollHeight;
+        let 스크롤양 = document.querySelector("html").scrollTop;
+        let 보이는높이 = document.querySelector("html").clientHeight;
+
+        if (스크롤양 < 보이는높이 * 0.1) {
+          $(".scrolling").css("width", "1%");
+        } else if (스크롤양 <= 보이는높이 * 0.5) {
+          $(".scrolling").css("width", "50%");
+        } else if (스크롤양 >= 보이는높이) {
+          $(".scrolling").css("width", "100%");
+        }
+      });
+    </script>
+
+    <!-- click 시 dark / light 바꾸기 -->
+    <script>
+      let count = 0;
+
+      $(".badge").on("click", function () {
+        count++;
+        if (count % 2 === 0) {
+          $(".badge")
+            .html("Dark 🔄")
+            .removeClass("badge-light")
+            .addClass("badge-dark");
+        } else if (count % 1 === 0) {
+          $(".badge")
+            .html("Light 🔄")
+            .removeClass("badge-dark")
+            .addClass("badge-light");
+        }
+      });
+    </script>
+
+    <!-- 우측상단 네비게이션 바 내용물 -->
+    <ul class="list-group">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+      <li class="list-group-item">A fourth item</li>
+      <li class="list-group-item">And a fifth one</li>
+    </ul>
+
+    <!-- 로그인 칸 -->
+    <div class="main-bg">
+      <h4>shirts on Sale</h4>
+      <button id="loginBtn" class="btn btn-danger">로그인</button>
+    </div>
+
+    <!-- 로그인 버튼 -->
+    <script>
+      document
+        .querySelector(".navbar-toggler")
+        .addEventListener("click", function () {
+          document.querySelectorAll(".list-group")[0].classList.toggle("show");
+        });
+
+      $("#loginBtn").on("click", function () {
+        $(".black-bg").addClass("show-modal");
+      });
+
+      $("#close").on("click", function () {
+        $(".black-bg").removeClass("show-modal");
+      });
+    </script>
+
+    <!-- 로그인 유효성 검사 -->
+    <script>
+      // $("#send").on("click", function (e) {
+      $("form").on("submit", function (e) {
+        let inId = document.getElementById("ID").value;
+        let inPw = document.getElementById("PW").value;
+
+        if (inId === "") {
+          e.preventDefault();
+          alert("id가 공백입니다");
+        } else if (/\S+@\S+\.\S+/.test(inId)) {
+          alert("email 형식에 맞지 않음");
+        } else if (inPw === "") {
+          e.preventDefault();
+          alert("pw가 공백입니다");
+        } else if (inPw.length < 6 || /[A-Z]/.test(inPw) == false) {
+          e.preventDefault();
+          alert("pw는 6자 이상, 영어 대문자를 포함해서 입력하세요");
+        }
+      });
+    </script>
+
+    <!-- 스크롤 양 늘리려고 ㅋ -->
+    <div style="height: 1000px"></div>
+
+    <!-- 슬라이드,이전,다음 등 이미지 모음 -->
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="./cars/car1.png" draggable="false" />
+        </div>
+        <div class="slide-box">
+          <img src="./cars/car2.png" draggable="false" />
+        </div>
+        <div class="slide-box">
+          <img src="./cars/car3.png" draggable="false" />
+        </div>
+      </div>
+    </div>
+
+    <!-- 이미지 드래그 & 드랍 기능 -->
+    <script>
+      function imgChange() {
+        $(".slide-container")
+          .css("transition", "all 0.3s")
+          .css("transform", `translateX(-${nowPicture * 100}vw)`);
+      }
+
+      let nowPicture = 0;
+      let imgLength = $(".slide-box").length;
+      let 시작좌표 = 0;
+      let 눌렀냐 = false;
+
+      $(".slide-box").on("mousedown", function (e) {
+        시작좌표 = e.clientX;
+        눌렀냐 = true;
+      });
+
+      $(".slide-box").on("mousemove", function (e) {
+        if (눌렀냐 === true) {
+          if (
+            (nowPicture === 0 && e.clientX - 시작좌표 > 0) ||
+            (nowPicture === imgLength - 1 && e.clientX - 시작좌표 < 0)
+          ) {
+            return;
+          }
+
+          $(".slide-container").css(
+            "transform",
+            `translateX(calc(${e.clientX - 시작좌표}px - ${
+              nowPicture * 100
+            }vw))`
+          );
+        }
+      });
+
+      $(".slide-box").on("mouseup", function (e) {
+        눌렀냐 = false;
+
+        if (e.clientX - 시작좌표 < -100 && nowPicture < imgLength - 1) {
+          nowPicture++;
+        } else if (e.clientX - 시작좌표 > 0 && nowPicture > 0) {
+          nowPicture--;
+        }
+
+        imgChange();
+
+        setTimeout(() => {
+          $(".slide-container").css("transition", "none");
+        }, 500);
+      });
+
+      // 이미지 드래그 & 드랍 기능 모바일 버젼
+
+      $(".slide-box").on("touchstart", function (e) {
+        시작좌표 = e.touches[0].clientX; // 몇 번째 손가락인지?
+        눌렀냐 = true;
+      });
+
+      $(".slide-box").on("touchmove", function (e) {
+        if (눌렀냐 === true) {
+          if (
+            (nowPicture === 0 && e.touches[0].clientX - 시작좌표 > 0) ||
+            (nowPicture === imgLength - 1 &&
+              e.touches[0].clientX - 시작좌표 < 0)
+          ) {
+            return;
+          }
+
+          $(".slide-container").css(
+            "transform",
+            `translateX(calc(${e.changedTouches[0].clientX - 시작좌표}px - ${
+              nowPicture * 100
+            }vw))`
+          );
+        }
+      });
+
+      $(".slide-box").on("touchend", function (e) {
+        눌렀냐 = false;
+
+        if (
+          e.changedTouches[0].clientX - 시작좌표 < -100 &&
+          nowPicture < imgLength - 1
+        ) {
+          nowPicture++;
+        } else if (
+          e.changedTouches[0].clientX - 시작좌표 > 0 &&
+          nowPicture > 0
+        ) {
+          nowPicture--;
+        }
+
+        imgChange();
+
+        setTimeout(() => {
+          $(".slide-container").css("transition", "none");
+        }, 500);
+      });
+    </script>
+
+    <!-- 이미지 이동 버튼 -->
+    <button class="preview">이전</button>
+    <button class="slide" data-index="0">1</button>
+    <button class="slide" data-index="1">2</button>
+    <button class="slide" data-index="2">3</button>
+    <button class="next">다음</button>
+
+    <!-- 이미지 이동 버튼 기능 -->
+    <script>
+      $(".preview").on("click", function () {
+        if (nowPicture > 0) {
+          nowPicture--;
+          imgChange();
+        }
+      });
+
+      $(".slide").on("click", function () {
+        nowPicture = parseInt($(this).data("index"), 10);
+        imgChange();
+      });
+
+      $(".next").on("click", function () {
+        if (nowPicture < imgLength - 1) {
+          nowPicture++;
+          imgChange();
+        }
+      });
+    </script>
+
+    <!-- 깜짝 이벤트!! -->
+    <div class="alert alert-danger">
+      <span id="count">5</span>초 이내 구매시 사은품 증정!
+    </div>
+
+    <script>
+      let countdown = 4;
+
+      setInterval(function () {
+        if (countdown !== 0) {
+          $("#count").html(countdown);
+          countdown--;
+        } else if (countdown === 0) {
+          $(".alert").hide();
+          clearTimeout();
+        }
+      }, 1000);
+    </script>
+
+    <!-- 부트스트랩~ -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- 아무말 스크롤 박스 -->
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas
+      voluptatum minus praesentium fugit debitis at, laborum ipsa itaque placeat
+      sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur
+      praesentium exercitationem.
+    </div>
+
+    <!-- 아무말 스크롤 박스 다 읽었는지 체크 -->
+    <script>
+      $(".lorem").on("scroll", function () {
+        let 스크롤양 = document.querySelector(".lorem").scrollTop;
+        let 실제높이 = document.querySelector(".lorem").scrollHeight;
+        let 눈에보이는div높이 = document.querySelector(".lorem").clientHeight;
+
+        if (스크롤양 + 눈에보이는div높이 === 실제높이) {
+          alert("다 읽음");
+        }
+      });
+    </script>
+  </body>
+</html>

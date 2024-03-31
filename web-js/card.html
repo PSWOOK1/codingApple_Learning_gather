@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="main.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="card-background"></div>
+    <div class="card-box">
+      <img src="./cards/card1.png" />
+    </div>
+    <div class="card-box">
+      <img src="./cards/card2.png" />
+    </div>
+
+    <div class="card-box">
+      <img src="./cards/card3.png" />
+    </div>
+
+    <script>
+      // 기울기 m 계산
+      var m = (0.9 - 1) / (5860 - 5300);
+      // y절편 b 계산
+      var b = 1 - m * 5300;
+
+      $(window).scroll(function () {
+        var 높이 = $(window).scrollTop();
+        console.log(높이);
+
+        var y = (-1 / 530) * 높이 + 586 / 53;
+        $(".card-box").eq(0).css("opacity", y);
+        var scaleValue = m * 높이 + b;
+
+        $(".card-box").eq(0).css("transform", `scale( ${scaleValue} )`);
+      });
+    </script>
+  </body>
+</html>
